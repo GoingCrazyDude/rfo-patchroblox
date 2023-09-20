@@ -1,3 +1,8 @@
+if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+    Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`"  `"$($MyInvocation.MyCommand.UnboundArguments)`""
+    Exit
+}
+
 $rblxPath = Get-ItemPropertyValue -Path 'Registry::HKEY_CURRENT_USER\Software\ROBLOX Corporation\Environments\roblox-player' -Name '(Default)'
 $rblxPath = $rblxpath -replace 'RobloxPlayerLauncher.exe'
 $rblxAltPath = Get-ItemPropertyValue -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\roblox-player-admin' -Name 'InstallLocation'

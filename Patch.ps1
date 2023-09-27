@@ -7,8 +7,8 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 try {
-    $rblxPath = Get-ItemPropertyValue -LiteralPath 'HKCU:\Software\ROBLOX Corporation\Environments\roblox-player' -Name '(Default)'
-    $rblxPath = $rblxpath -replace 'RobloxPlayerLauncher.exe'
+    $roblox = Get-ItemPropertyValue -LiteralPath 'HKCU:\Software\ROBLOX Corporation\Environments\roblox-player' -Name '(Default)'
+    $rblxPath = $roblox -replace 'RobloxPlayerLauncher.exe'
     echo $rblxPath
     iwr -uri 'https://raw.githubusercontent.com/rbxflags/Flags/main/ClientAppSettings.json' -OutFile(New-Item -Path $rblxPath/ClientSettings/ClientAppSettings.json -Force)
     echo 'Installed Successfully'
